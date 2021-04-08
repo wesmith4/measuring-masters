@@ -23,8 +23,12 @@ for year in range(1934,2022):
     if year not in [1943,1944,1945,2020]:
         data = pd.read_csv("./data/{}data.csv".format(year))
         winningScore = data["Total Score"].loc[0]
-        winner = data["Player"].loc[0]
+        winner = data["Player"].loc[0].split("Playoff")[0]
         winningScores.loc[year] = [year,winningScore,winner]
+
+table = pd.pivot_table(winningScores,index=["Winner"],values=["Winning Score"],aggfunc=np.count_nonzero).sort_values("Winning Score",ascending=False)
+table = table.rename(columns={"Winning Score": "Masters Wins"})
+st.write(table)
 
 st.markdown("## Winning Scores over the Years")
 fig = px.scatter(winningScores,
@@ -36,7 +40,6 @@ fig = px.scatter(winningScores,
                 hover_name="Year",
                 hover_data=["Winner","Winning Score"])
 st.write(fig)
-
 
 st.markdown("# Data Viewer")
 year = st.number_input("Year",min_value=1934,max_value=2021,value=2021)
