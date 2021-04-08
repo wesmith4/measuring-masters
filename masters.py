@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
+import statsmodels.api as sm
+
 
 st.title("Measuring the Masters")
 st.image("https://www.masters.com/assets/images/nav/masters_logo.png")
