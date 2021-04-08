@@ -23,8 +23,6 @@ year = st.number_input("Year",min_value=1934,max_value=2021,value=2021)
 displayData = pd.read_csv("./data/{}data.csv".format(year))
 st.dataframe(displayData)
 
-displayData.loc[0]["Total Score"]
-
 
 # Winning Scores
 winningScores = pd.DataFrame(columns=("Year","Winning Score","Winner"))
@@ -43,7 +41,8 @@ fig = px.scatter(winningScores,
                 labels={'x':'Year','y':'Winning Score'},
                 color_discrete_sequence=["#207F50"],
                 hover_name="Year",
-                hover_data=["Winner","Winning Score"])
+                hover_data=["Winner","Winning Score"],
+                title="Winning Scores over the Years")
 st.write(fig)
 
 st.markdown("""
